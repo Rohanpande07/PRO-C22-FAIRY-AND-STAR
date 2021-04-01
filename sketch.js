@@ -9,16 +9,16 @@ const Body = Matter.Body;
 
 function preload()
 {
-	starImg = loadImage("images/star.png");
-	bgImg = loadImage("images/starNight.png");
-	fairyImg = loadAnimation("images/fairyImage1.png", "images/fairyImage2.png");
-	fairyVoice = loadSound("sound/JoyMusic.mp3");
+	starImg = loadImage("star.png");
+	bgImg = loadImage("starNight.png");
+	fairyImg = loadAnimation("fairyImage1.png", "fairyImage2.png");
+	fairyVoice = loadSound("JoyMusic.mp3");
 }
 
 function setup() {
 	createCanvas(800, 750);
 
-	fairyVoice.loop(); 
+	fairyVoice.loop();
 
 	fairy = createSprite(120,575);
 	fairy.addAnimation("fairy",fairyImg);
@@ -26,7 +26,7 @@ function setup() {
 
 	star = createSprite(650,30);
 	star.addImage(starImg);
-	star.scale = 0.2;
+	star.scale = 0.16;
 
 
 	engine = Engine.create();
@@ -36,7 +36,6 @@ function setup() {
 	World.add(world, starBody);
 	
 	Engine.run(engine);
-
 }
 
 
@@ -48,7 +47,7 @@ function draw() {
 
   console.log(star.y);
 
-  if(star.y > 470 && starBody.position.y > 470 ) {
+  if(star.y > 530 && starBody.position.y > 530) {
 	Matter.Body.setStatic(starBody, true);
   }
 
