@@ -1,11 +1,11 @@
-var starImg,bgImg;
-var star, starBody;
-var fairy, fairyImg, fairyVoice;
-
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+
+var starImg,bgImg;
+var star, starBody;
+var fairy, fairyImg, fairyVoice;
 
 function preload()
 {
@@ -18,7 +18,8 @@ function preload()
 function setup() {
 	createCanvas(800, 750);
 
-	fairyVoice.loop();
+	engine = Engine.create();
+	world = engine.world;
 
 	fairy = createSprite(120,575);
 	fairy.addAnimation("fairy",fairyImg);
@@ -28,19 +29,17 @@ function setup() {
 	star.addImage(starImg);
 	star.scale = 0.16;
 
-
-	engine = Engine.create();
-	world = engine.world;
-
 	starBody = Bodies.circle(650,30,5,{restitution:0.5, isStatic:true});
 	World.add(world, starBody);
-	
-	Engine.run(engine);
 }
 
 
 function draw() {
   background(bgImg);
+
+  fairyVoice.play();
+
+  Engine.update(engine);
 
   star.x= starBody.position.x 
   star.y= starBody.position.y 
@@ -62,7 +61,7 @@ function keyPressed() {
 	}
 
 	if(keyWentDown("right")){
-		fairy.velocityX = 2;
+		fairy.velocityX = 5;
 	}
 
 	if(keyWentUp("right")){
@@ -70,7 +69,7 @@ function keyPressed() {
 	}
 
 	if(keyWentDown("left")){
-		fairy.velocityX = -2;
+		fairy.velocityX = -5;
 	}
 
 	if(keyWentUp("left")){
